@@ -6,7 +6,7 @@ main:
 	
 readFloat:
     li $v0,2
-    lw $v0,arrayFloat
+    l.s $f12,array
     syscall
     j end
 end:
@@ -14,6 +14,4 @@ end:
     syscall
     
 .data
-    arrayFloat: .float 304.5
-    array: .word 24
-    msg: .asciiz " valores positivos"
+    array: .float 5.5
