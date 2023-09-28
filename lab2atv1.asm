@@ -8,7 +8,7 @@ read_loop:
 	beq $t0,24,initializeValues
 	li $v0,6
 	syscall
-	sw $v0, array($t0)
+	s.s $f0, array($t0)
 	addi $t0,$t0,4
 	j read_loop
 	
@@ -19,8 +19,8 @@ initializeValues:
 	
 sumPositives:
     beq $t0,24,print
-    lw $s1,array($t0)
-    bgt $s1,0,addToCounter
+    l.s $f1,array($t0)
+    bgt $f1,0,addToCounter
     addi $t0,$t0,4
     j sumPositives
     
