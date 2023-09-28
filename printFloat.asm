@@ -5,6 +5,9 @@ main:
 	j readFloat
 	
 readFloat:
+    li $v0,6
+    syscall
+    s.s $f0,array
     li $v0,2
     l.s $f12,array
     syscall
@@ -14,4 +17,4 @@ end:
     syscall
     
 .data
-    array: .float 5.5
+    array: .word 4
