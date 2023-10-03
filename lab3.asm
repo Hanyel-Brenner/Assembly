@@ -9,19 +9,19 @@ main:
 	bgt $t0,30,endValorInvalido
 	blt $t0,1,endValorInvalido
 	li $t0,0
-	li t1,0   ;counter solely to multiplyL label
-	li $s3,0   ;register with highest number
-	lw $s1,L   ;register that holds L times 4 (number of bytes in array)
+	li $t1,0   
+	li $s3,0   
+	lw $s1,L   
 	j multiplyL
 	
 multiplyL:
-    beq $t1,3,read_loop  ;L+L+L... 4 times so we have number of bytes
+    beq $t1,3,read_loop  
     add $s1,$s1,$s1
     addi $t1,$t1,1
     j multiplyL
 	
 read_loop:
-	beq $t0,$s1,assignVelocity  ;s1 should have number of bytes
+	beq $t0,$s1,assignVelocity  
 	li $v0,5
 	syscall
 	move $t4,$v0
@@ -85,7 +85,7 @@ end:
     
 .data
     L: .word 4
-    array: word 120
+    array: .word 120
     msg1: .asciiz ": valor invalido."
-    msg1: .asciiz ": velocidade invalida."
+    msg2: .asciiz ": velocidade invalida."
     msg3: .asciiz "\nMaior nivel : velocidade "
