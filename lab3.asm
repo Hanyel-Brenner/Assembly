@@ -86,5 +86,5 @@ end:
     array: .word 120
     msg1: .asciiz ": valor invalido."
     msg2: .asciiz ": velocidade invalida"
-    msg3: .asciiz "Maior nivel : velocidade "
+    msg3: .asciiz "Maior nivel: velocidade "
     newline: .asciiz "\n"
