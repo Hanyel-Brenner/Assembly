@@ -12,29 +12,22 @@ main:
 	li $t1,0   
 	li $s3,0   
 	lw $s1,L   
-	j multiplyL
-	
-multiplyL:
-    beq $t1,3,read_loop  
-    add $s1,$s1,$s1
-    addi $t1,$t1,1
-    j multiplyL
+	j read_loop
 	
 read_loop:
 	beq $t0,$s1,assignVelocity  
 	li $v0,5
 	syscall
 	move $t4,$v0
-	bgt $v0,50,endVelocidadeInvalida
-	blt $v0,1,endVelocidadeInvalida
-	sw $v0, array($t0)
-	bgt $v0,$s3,assign
-	addi $t0,$t0,4
+	bgt $t4,50,endVelocidadeInvalida
+	blt $t4,1,endVelocidadeInvalida
+	bgt $t4,$s3,assign
+	addi $t0,$t0,1
 	j read_loop
 	
 assign:
-    move $s3,$v0
-    addi $t0,$t0,4
+    move $s3,$t4
+    addi $t0,$t0,1
     j read_loop
     
 assignVelocity:
@@ -68,6 +61,11 @@ endVelocidadeInvalida:
     li $v0,4
     la $a0,msg2
     syscall
+    li $v0,4
+    la $a0,newline
+    syscall
+    addi $t0,$t0,1
+    j read_loop
 
 endValorInvalido:
     li $v0,1
@@ -87,5 +85,6 @@ end:
     L: .word 4
     array: .word 120
     msg1: .asciiz ": valor invalido."
-    msg2: .asciiz ": velocidade invalida."
-    msg3: .asciiz "\nMaior nivel : velocidade "
+    msg2: .asciiz ": velocidade invalida"
+    msg3: .asciiz "Maior nivel : velocidade "
+    newline: .asciiz "\n"
