@@ -19,9 +19,9 @@ initializeValues:
 	
 sumPositives:
     beq $t0,24,print
-    l.s $f2,array($t0)
-    l.s $f4,zeroValue
-    c.le.s $f2,$f1
+    lwc1 $f2,array($t0)
+    lwc1 $f4,zeroValue
+    c.le.s $f2,$f4
     bc1f addToCounter
     addi $t0,$t0,4
     j sumPositives
@@ -35,9 +35,7 @@ print:
     li $v0,1
     move $a0,$t1
     syscall
-    li $v0,4
-    la $a0,msg
-    syscall
+    
     j end
     
 end:
@@ -46,5 +44,5 @@ end:
     
 .data
     array: .word 24
-    msg: .asciiz " valores positivos"
+    msg: .asciiz ""
     zeroValue: .float 0.0
